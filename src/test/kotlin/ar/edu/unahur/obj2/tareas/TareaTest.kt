@@ -8,17 +8,44 @@ class TareaTest : DescribeSpec({
   val empleado1= Empleado()
   val empleado2=Empleado()
 
-  val tareaSimple=TareaSimples(8,empleadoResponsable,400)
+  val listaEmpleadosSimple= mutableListOf<Empleado>()
+  val tareaSimple=TareaSimples(8,empleadoResponsable,400,listaEmpleadosSimple)
 
-  val tareaIntegracion=TareasIntegracion(empleadoResponsable)
-  val listaEmpleados= mutableListOf<Empleado>()
+  val listaEmpleadosInt= mutableListOf<Empleado>()
+  val tareaIntegracion=TareasIntegracion(empleadoResponsable,listaEmpleadosInt)
+
 
   val listaSubTareas= mutableListOf<Tarea>()
 
-  describe("Una tarea Integracion ") {
-    listaEmpleados.add(empleado1)
-    listaEmpleados.add(empleado2)
-    listaEmpleados.size.shouldBe(2)
-    tareaIntegracion.nominaEmpleados(tareaIntegracion,listaEmpleados).shouldBe(3)
+  describe(" Nomina  tarea Integracion ") {
+    listaEmpleadosInt.add(empleado1)
+    listaEmpleadosInt.add(empleado2)
+    listaEmpleadosInt.size.shouldBe(2)
+    tareaIntegracion.nominaEmpleados(tareaIntegracion,listaEmpleadosInt).shouldBe(3)
   }
+
+  describe("Nomina tarea Simple"){
+    listaEmpleadosSimple.add(empleado1)
+    listaEmpleadosSimple.add(empleado2)
+    listaEmpleadosSimple.add(empleado1)
+
+    tareaSimple.nominaEmpleados(tareaSimple,listaEmpleadosSimple).shouldBe(4)
+  }
+
+  describe("Horas necesarias para terminar una tarea"){ // FALTARIA HACER PROBANDO CON AGREGAR COMO SUBTAREA A TAREA INTEGRACION
+    listaSubTareas.add(tareaSimple)
+    listaEmpleadosSimple.add(empleado1)
+    listaEmpleadosSimple.add(empleado2)
+
+    tareaSimple.horasParaTerminarUnaTarea(listaSubTareas,listaEmpleadosSimple).shouldBe(4)
+
+  }
+
+  describe("Costo de una tarea"){
+    val tareaSimple2 = TareaSimples(4,empleadoResponsable,200,listaEmpleadosSimple)
+    listaSubTareas.add(tareaSimple)
+    listaSubTareas.add(tareaSimple2)
+    tareaIntegracion.costoDeUnaTarea().shouldBe()
+  }
+
 })
