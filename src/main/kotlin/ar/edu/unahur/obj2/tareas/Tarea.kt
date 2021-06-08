@@ -30,7 +30,11 @@ class TareaSimples(val horasEstimadas: Int, val responsable: Responsable, val co
   class TareasIntegracion(responsable: Empleado,  override val listaEmpleados: MutableList<Empleado>) : Tarea(){
 
     val subTareas = mutableListOf<Tarea>() // TAREAS QUE PUEDEN SER INTEGRACION O SIMPLES
-    // METODO PARA SACAR EL BONUS DEL RESPONSABLE
+
+      fun agregarTareaALista(tarea:Tarea){
+        subTareas.add(tarea)
+    }
+      // METODO PARA SACAR EL BONUS DEL RESPONSABLE
       fun bonusResponsable()= this.sumaCostoTareas() * 3 / 100
     //SUMA DE LAS HORAS ,DE TODAS LAS SUB TAREAS ,QUE SE NECESITA PARA TERMINAR UNA TAREA
       override fun horasParaTerminarUnaTarea(lista: List<Tarea>,listaE:List<Empleado>)= subTareas.sumBy { t ->t.horasParaTerminarUnaTarea(lista,listaE) } + 1 * 8
