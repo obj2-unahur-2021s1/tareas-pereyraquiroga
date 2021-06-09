@@ -31,7 +31,7 @@ class TareaSimples(val horasEstimadas: Int, val responsable: Responsable, val co
 
     val subTareas = mutableListOf<Tarea>() // TAREAS QUE PUEDEN SER INTEGRACION O SIMPLES
 
-      fun agregarTareaALista(tarea:Tarea){
+      fun agregarTareaALista(tarea:Tarea){ // METODO ALTERNATIVO PARA PODER USARLO EN EL TEST
         subTareas.add(tarea)
     }
       // METODO PARA SACAR EL BONUS DEL RESPONSABLE
