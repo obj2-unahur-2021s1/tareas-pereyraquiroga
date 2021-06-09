@@ -7,11 +7,11 @@ abstract class Tarea(){
     open val listaEmpleados= mutableListOf<Empleado>()
      abstract fun horasParaTerminarUnaTarea(lista: List<Tarea>,listaE:List<Empleado>) : Int
     abstract  fun costoDeUnaTarea(): Int
-    abstract fun nominaEmpleados(tarea:Tarea,lista : List<Empleado>):Int
+    abstract fun nominaEmpleados(lista : List<Empleado>):Int
 }
 
 class TareaSimples(val horasEstimadas: Int, val responsable: Responsable, val costoInfrastructura : Int, override val listaEmpleados: MutableList<Empleado>) : Tarea(){
-
+// LE PASAMS POR PARAMETROS LA LISTA DE EMPLEADOS , CADA TAREA QUE CREAMOS VA A TENER SU PROPIA LISTA
 
     override fun horasParaTerminarUnaTarea(lista: List<Tarea>,listaE:List<Empleado>)= horasEstimadas / listaE.size // PORQUE DOS EMPLEADOS LAS HACEN EN MENS TIEMPO
     override fun costoDeUnaTarea() = (salariosEmpleados() * horasTrabajoCadaEmpleado()) + (horasEstimadas * responsable.sueldoResponsable(this)) + costoInfrastructura
@@ -22,7 +22,7 @@ class TareaSimples(val horasEstimadas: Int, val responsable: Responsable, val co
     fun horasTrabajoCadaEmpleado()= listaEmpleados.sumBy{e-> e.horasDeTrabajo(this)}
     // METODO QUE USO EN EMPLEADO PARA SACAR LAS HORAS DE TRABAJO QUE LE CORRESPONDEN A CADA EMPLEADO
     fun cantidadEmpleadosDeTarea() = listaEmpleados.size
-    override fun nominaEmpleados(tarea:Tarea,lista : List<Empleado>) = (listaEmpleados.size) +1
+    override fun nominaEmpleados(lista : List<Empleado>) = (listaEmpleados.size) +1
 }
 
 
@@ -43,8 +43,8 @@ class TareaSimples(val horasEstimadas: Int, val responsable: Responsable, val co
       override fun costoDeUnaTarea() = sumaCostoTareas() + bonusResponsable()
       //SUMA DE TODOS LOS COSTOS DE TODAS LAS SUBTAREAS
       fun sumaCostoTareas()= subTareas.sumBy { t-> t.costoDeUnaTarea()  }
-    // SUMA DE EL RESPONSABLE MAS LA CANTIDAD DE EMPLEADOS
-    override fun nominaEmpleados(tarea:Tarea,lista : List<Empleado>)= (lista.size) +1 // el 1 que sumamos es el responsable de tareas
+    // SUMA DE EL RESPONSABLE MAS LA CANTIDAD DE EMPLEADOS QUE TIENE SU PROPIA LISTA
+    override fun nominaEmpleados(lista : List<Empleado>)= (lista.size) +1 // el 1 que sumamos es el responsable de tareas
 
 }
  open class Empleado  {

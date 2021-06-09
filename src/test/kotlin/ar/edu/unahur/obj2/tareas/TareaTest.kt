@@ -21,7 +21,7 @@ class TareaTest : DescribeSpec({
     listaEmpleadosInt.add(empleado1)
     listaEmpleadosInt.add(empleado2)
     listaEmpleadosInt.size.shouldBe(2)
-    tareaIntegracion.nominaEmpleados(tareaIntegracion,listaEmpleadosInt).shouldBe(3)
+    tareaIntegracion.nominaEmpleados(listaEmpleadosInt).shouldBe(3)
   }
 
   describe("Nomina tarea Simple"){
@@ -29,7 +29,7 @@ class TareaTest : DescribeSpec({
     listaEmpleadosSimple.add(empleado2)
     listaEmpleadosSimple.add(empleado1)
 
-    tareaSimple.nominaEmpleados(tareaSimple,listaEmpleadosSimple).shouldBe(4)
+    tareaSimple.nominaEmpleados(listaEmpleadosSimple).shouldBe(4)
   }
 
   describe("Horas necesarias para terminar una tarea"){
@@ -42,6 +42,7 @@ class TareaTest : DescribeSpec({
   }
 
   describe("Costo de una tarea"){
+    //USAMOS TAREASIMPLE2 PARA ESTA PRUEBA
     val tareaSimple2 = TareaSimples(4,empleadoResponsable,200,listaEmpleadosSimple)
     tareaIntegracion.agregarTareaALista(tareaSimple)
     tareaIntegracion.agregarTareaALista(tareaSimple2)
